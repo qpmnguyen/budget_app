@@ -1,0 +1,15 @@
+name: budget_app
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - shiny
+  - pandas
+  - numpy
+  - matplotlib
+  - plotnine
+  - statsmodels
+  - sqlalchemy
+  - pip
+  - pip:
+    - dropbox
