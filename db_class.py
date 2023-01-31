@@ -14,6 +14,10 @@ class budget:
     create_table():
         This function creates the table named budget if
         it does not exist
+    update_table()
+        Updating an entry in the database 
+    
+    
     
     """
     def __init__(self, path: str) -> None:
@@ -24,7 +28,7 @@ class budget:
         self.cur.execute("""CREATE TABLE IF NOT EXISTS budget(
             id INTEGER PRIMARY KEY,
             date DATE, 
-            value, REAL,
+            value REAL,
             category TEXT,
             description TEXT
         )""")
@@ -39,3 +43,11 @@ class budget:
         """
         self.cur.execute(exstring.format(c = colname, v = value, i = id))
 
+    def add_entry(self, data: list) -> None:
+        self.cur.executemany("""
+            INSERT OR IGNORE INTO products VALUES(?, ?, ?, ?, ?)
+        """, data)
+        self.con.commit()
+
+    def close(self) -> None:
+        self.con.close()
